@@ -1,19 +1,23 @@
 version: '3.8' # Use a suitable version for your Docker engine
 
 services:
-  qd-authentication-api:
-    image: qd-authentication-api # Use the correct image name
-    ports:
-      - "9090:9090" # Map host port to container port
-    networks:
-      - qd-network
-
-  qd-email-api:
-    image: qd-email-api # Use the correct image name
+  qd.email.api:
+    image: qd.email.api:0.0.1 # Use the correct image name
     ports:
       - "9091:9091" # Map host port to container port
     networks:
       - qd-network
+
+
+  qd.authentication.api:
+    image: qd.authentication.api:0.0.1 # Use the correct image name
+    ports:
+      - "9090:9090" # Map host port to container port
+    networks:
+      - qd-network
+    depends_on:
+      - qd.email.api
+
 
 networks:
   qd-network:
